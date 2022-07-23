@@ -1,0 +1,43 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <h2>All employees</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Operations</th>
+        </tr>
+
+        <c:forEach var="emp" items="${allEmps}">
+
+            <c:url var="updateButton" value="/updateInfo">
+                <c:param name="empId" value="${emp.id}" />
+            </c:url>
+
+            <c:url var="deleteButton" value="/deleteInfo">
+                <c:param name="empId" value="${emp.id}" />
+            </c:url>
+
+            <tr>
+                <td>${emp.name}</td>
+                <td>${emp.surname}</td>
+                <td>${emp.department}</td>
+                <td>${emp.salary}</td>
+                <td>
+                    <button onclick="window.location.href = '${updateButton}'">update</button>
+                    <button onclick="window.location.href = '${deleteButton}'">delete</button>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+    <button onclick="window.location.href = 'addEmployee'">add</button>
+</body>
+</html>
